@@ -191,6 +191,16 @@ public class AppWindow {
 		table.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
 		panel.add(new JScrollPane(table));
 
+		JPanel consolePanel = new JPanel();
+		tabbedPane.addTab("Console", null, consolePanel, null);
+		consolePanel.setLayout(new BoxLayout(consolePanel, BoxLayout.PAGE_AXIS));
+
+		console = new Console();
+		logger = new Logger(console);
+		console.setFont(new Font("Courier", Font.PLAIN, 13));
+		console.setEditable(false);
+		consolePanel.add(new JScrollPane(console));
+		
 		try{
 			model = new GiveawayTableModel();
 			table.setModel(model);
@@ -217,16 +227,6 @@ public class AppWindow {
 		}catch(Exception e){
 			logger.write(e.getMessage(), Logger.Level.ERROR);
 		}
-
-		JPanel consolePanel = new JPanel();
-		tabbedPane.addTab("Console", null, consolePanel, null);
-		consolePanel.setLayout(new BoxLayout(consolePanel, BoxLayout.PAGE_AXIS));
-
-		console = new Console();
-		logger = new Logger(console);
-		console.setFont(new Font("Courier", Font.PLAIN, 13));
-		console.setEditable(false);
-		consolePanel.add(new JScrollPane(console));
 
 		JButton btnClearConsole = new JButton("Clear Log");
 		btnClearConsole.setAlignmentX(Component.CENTER_ALIGNMENT);
